@@ -1,4 +1,5 @@
 <div class="container">
+  <h2>Create a Post</h2>
   <form action="/create" method="post">
     <label>Title:
       <input type="text" name='post[title]' placeholder="Title">
@@ -8,10 +9,11 @@
     <textarea type="text" name='post[body]' rows='4' cols='30'></textarea>
     </label>
     <br>
+    <h4>Separate tags with a comma and space</h4>
     <label>Tags:
-    <input type="text" name='post[tags]' placeholder="Tags">
+      <input type="text" name='post[tags]' placeholder="Tags">
     </label>
     <br>
-    <input type="submit">
+    <input type="submit" value="Submit">
   </form>
 </div>

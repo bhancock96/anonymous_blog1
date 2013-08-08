@@ -1,0 +1,25 @@
+<div class="container">
+  <form action="/post/<%= @post.id %>/edit" method="post">
+    <label>Title:
+      <input type="text" name='title' value="<%= @post.title %>">
+    </label>
+    <br>
+    <label>Body:
+    <textarea type="text" name='body' rows='4' cols='30'><%= @post.body %></textarea>
+    </label>
+    <br>
+    <h4>Separate tags with a comma and space</h4>
+    <label>Add Tag:
+        <input type="text" name='tags'>
+    </label>
+    <br>
+
+    <h2>Edit existing tags</h2>
+  <ul>
+    <% @post.tags.all.each do |tag| %>
+    <li><%= tag.name %> - <button><a href="/post/<%= @post.id %>/tag/<%= tag.id %>/delete">Delete</a></button></li>
+    <% end %>
+  </ul>
+    <input type="submit">
+  </form>
+</div>

@@ -1,0 +1,7 @@
+<h2><%= @tag.name %></h2>
+
+<ul>
+  <% @tag.posts.each do |post| %>
+    <li><a href="/post/<%= post.id %>"><%= post.title %></a></li>
+  <% end %>
+</ul>

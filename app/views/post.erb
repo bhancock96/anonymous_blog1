@@ -1,7 +1,12 @@
-<h1><%= @post.title %></h1>
-<h4><%= @post.body %></h4>
-  <ul>
-    <% @post.tags.each do |tag| %>
-      <li><%= tag.name %></li>
-    <% end %>
-  </ul>
+<div class="container">
+  <h1><%= @post.title %></h1>
+  <h4><%= @post.body %></h4>
+    <ul>
+      <% @post.tags.each do |tag| %>
+        <li><a href="/tag/<%= tag.id %>"><%= tag.name %></a></li>
+      <% end %>
+    </ul>
+  <a href="/post/<%= @post.id %>/edit">Edit</a>
+  <br>
+  <a href="/posts">Back to Posts</a>
+</div>

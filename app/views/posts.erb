@@ -1,7 +1,9 @@
 <div class="container">
+  <h2>All Posts</h2>
   <ul>
     <% @posts.each do |post| %>
       <li><a href='/post/<%= post.id %>'><%= post.title %></a></li>
+      <button><a href="/post/<%= post.id %>/delete">Delete Post</a></button>
     <% end %>
   </ul>
 </div>
