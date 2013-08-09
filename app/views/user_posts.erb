@@ -1,0 +1,8 @@
+<h2>Posts by <%= @user.name %></h2>
+<% @posts.each do |post| %>
+<ul>
+  <li><a href="/post/<%= post.id %>"><%= post.title %></a></li>
+</ul>
+<% end %>
+
+<a href="/posts">Back to posts</a>

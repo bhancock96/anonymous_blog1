@@ -1,6 +1,6 @@
 get '/' do
   # Look in app/views/index.erb
-  erb :index
+  erb :login_register
 end
 
 

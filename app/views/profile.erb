@@ -1,0 +1,12 @@
+<div class="container">
+  <h2>Posts by <%= @user.name %></h2>
+  <button><a href="/create">Create Post</a></button>
+  <ul>
+    <% @user.posts.each do |post| %>
+      <li><a href='/post/<%= post.id %>'><%= post.title %></a></li>
+      <button><a href="/post/<%= post.id %>/delete">Delete Post</a></button>
+    <% end %>
+  </ul>
+  <a href="/logout">Logout</a>
+  <a href="/posts">See all posts</a>
+</div>

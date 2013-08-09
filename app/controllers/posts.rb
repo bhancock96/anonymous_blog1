@@ -1,6 +1,16 @@
+# before '/*' do
+  
+#   post = Post.find(params[:id])
+#   unless 
+# end
 
 get '/create' do
-  erb :create
+  if current_user
+    @user = User.find(session[:user_id])
+    erb :create
+  else
+    erb :login_register
+  end
 end
 
 get '/post/:post_id/tag/:id/delete' do
@@ -13,24 +23,35 @@ end
 
 get '/post/:id/edit' do
   @post = Post.find(params[:id])
-  @tags = []
-  @post.tags.each do |tag|
-    @tags << tag.name
+  if current_user && current_user.posts.include?(@post)
+    @tags = []
+    @post.tags.each do |tag|
+      @tags << tag.name
+    end
+    @tags
+    erb :edit
+  else
+    erb :login_register
   end
-  @tags
-  erb :edit
+end
+
+get '/users/:id/posts' do
+  @user = User.find(params[:id])
+  @posts = @user.posts.all
+  erb :user_posts
 end
 
 get '/post/:id/delete' do
+  @user = User.find(session[:user_id])
   @post = Post.find(params[:id])
   @post.destroy
-  redirect "/posts" 
+  redirect "/users/#{@user.id}" 
 end
 
 
 get '/post/:id' do
-  @post = Post.find(params[:id])
-  erb :post
+    @post = Post.find(params[:id])
+    erb :post
 end
 
 get '/posts' do
@@ -42,14 +63,15 @@ end
 
 
 post '/create' do
-  @post = Post.create(title: params[:post][:title], body: params[:post][:body])
+  @user = User.find(session[:user_id])
+  @post = @user.posts.create(title: params[:post][:title], body: params[:post][:body])
   tags = params[:post][:tags]
   tags.split(', ').each do |tag|
     new_tag = Tag.find_or_create_by_name(tag)
     @post.tags << new_tag
   end
   @post.save
-  redirect '/posts'
+  redirect "/users/#{@user.id}"
 end
 
 post '/post/:id/edit' do
@@ -64,3 +86,7 @@ post '/post/:id/edit' do
 end
 
 
+post '/users/id/posts' do
+  @user = User.find_by_name(params[:name])
+  redirect "/users/#{@user.id}/posts"
+end

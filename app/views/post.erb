@@ -6,7 +6,10 @@
         <li><a href="/tag/<%= tag.id %>"><%= tag.name %></a></li>
       <% end %>
     </ul>
-  <a href="/post/<%= @post.id %>/edit">Edit</a>
+  <% if current_user && current_user.posts.include?(@post)%>
+    <a href="/post/<%= @post.id %>/edit">Edit</a>
+  <% end %>
+
   <br>
   <a href="/posts">Back to Posts</a>
 </div>

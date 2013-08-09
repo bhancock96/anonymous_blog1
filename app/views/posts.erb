@@ -6,4 +6,10 @@
       <button><a href="/post/<%= post.id %>/delete">Delete Post</a></button>
     <% end %>
   </ul>
+
+  <h3>See posts by:</h3>
+    <form action="/users/id/posts" method="post">
+      <input type="text" name='name' placeholder="Author name">
+      <input type="submit">
+    </form>
 </div>
